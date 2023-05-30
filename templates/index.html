@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dizaynerlik veb sayti</title>
+        <!--css ga havola yaratish-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/single.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cart.css' %}"> 
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    </head>
+    <body>
+    <!--navbar-->
+        <header>
+
+            <a href="#" class="logo">
+                <img style="height: 100px; width: 100px;" src="{% static 'images/logo.jpg' %}" alt="">
+            </a>
+            <ul class="navbar">
+                
+                <li><a href="#home">Uy</a></li>
+                <li><a href="#about">Biz haqimizda</a></li>
+                <li><a href="{% url 'shopping' %}">Xarid qilish</a></li>
+                <li><a href="#customers">Mijozlar</a></li>
+                <li><a href="{% url 'cart' %}">Savat</a></li>
+                <li><a href="{% url 'login' %}" >Kirish</a></li>
+                <li><a href="{% url 'signup' %}" >Ro'yxatdan o'tish</a></li>
+            </ul>  
+            <!--icon-->
+        
+        </header>
+
+        {% block content %}
+
+        {% endblock content %}
+
+        <section class="footer">
+            <div class="footer-box">
+                    <h2>Dizaynerlik sayti</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Voluptatem,facere</p>
+                    <div class="social">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-telegram'></i></a>
+                    </div>
+                </div>
+                <div class="footer-box">
+                    <h3>Qo'llab-quvvatlash</h3>
+                    <li><a href="#">Mahsulot</a></li>
+                    <li><a href="#">Yordam & Qo'llab-quvvatlash</a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#">Foydalanish shartlari</a></li>
+                </div>
+                <div class="footer-box">
+                    <h3>Qoʻllanmalarni koʻrish</h3>
+                    <li><a href="#">Xususiyatlari</a></li>
+                    <li><a href="#">Karyera</a></li>
+                    <li><a href="#">Blog xabarlari</a></li>
+                    <li><a href="#">Bizning filiallarimiz</a></li>
+                </div>
+                <div class="footer-box">
+                <h3>Aloqa</h3> 
+                <div class="contact">
+                    <span><i class='bx bxs-map'></i>Uzbekistan,Qashqadaryo,Yakkabog' </span>
+                    <span><i class='bx bxs-phone'></i>+998 936666701 </span>
+                    <span><i class='bx bxs-envelope'></i>nuriddinovquvonchbek4903@gmail.com</span>              
+                </div>
+                </div>
+            </section>
+            <div class="copyright">
+                <p>&#169; Barcha huquqlar himoyalangan</p>
+            </div>
+
+
+        <!--jsga link--> 
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>
+
+
+
+

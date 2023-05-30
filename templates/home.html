@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <!--uy-->
+    <section class="home" id="home">
+        <div class="home-text">
+            <h1>Kuningizni bizning <br> dizaynerlik ishlarmiz bilan boshlang!</h1>
+            <p style="font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a href="#" class="btn">Hozir ko'rib chiqing</a>
+        </div>
+        <div  class="home-img">
+            <img src="#"  alt="Bu yerda rasm bor.">
+        </div>
+    </section>
+    <!--haqida-->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img class="rasm" src="#" alt="">
+        </div>
+        <div class="about-text">
+            <h2>Bizning uylar</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+            <a href="#" class="btn">Batafsil ma'lumot</a>
+        </div>
+    </section>
+
+    <!--Mahsulotlar-->
+    <section class="sarlavha" id="sarlavha">
+        <div class="heading">
+            <h2>Bizning  mahsulotlarimiz </h2>
+        </div>
+        <!--kontener-->
+        <div class="mahsulotlar-konteneri">
+            {% for i in products%}
+                <div class="box">
+                    <img   src="{{ i.image.url }}" alt="Bu yerda rasm bor">
+                    <h3>{{ i.name }}</h3>
+                    <div class="content">
+                        <a href="{% url 'single' i.pk %}">Ko'rib chiqish</a>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </section> 
+    <!--Buyurtmachilar qismi-->
+     <section class="customers" id="customers">
+        <div class="heading">
+            <h2>Fikr va mulohazalar</h2>
+        </div>
+        <!--konytener2-->
+        <div class="customers-container">
+            <div class="box">
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star-half'></i>
+                    
+                </div>
+                <p>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <h2>Muhamnadiyev Ziyat</h2>
+                <img src="#" alt="Bu yerda foydalanuvchi rasmi bor">
+            </div>
+            <div class="box">
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star-half'></i>
+                    
+                </div>
+                <p>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <h2>Nuriddinov Azizbek</h2>
+                <img src="#" alt="Bu yerda foydalanuvchi rasmi bor">
+            </div>
+            <div class="box">
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star-half'></i>
+                </div>
+                <p>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <h2>Nuriddinov Farruh</h2>
+                <img src="#" alt="Bu yerda foydalanuvchi rasmi bor">
+            </div>
+        </div> 
+     </section>
+{% endblock content %}  
