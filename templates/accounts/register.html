@@ -1,0 +1,17 @@
+{% extends 'accounts/index.html' %}
+{% block content %}
+  <div class="login-wrap">
+    <h2>Ro'yxatdan o'tish</h2>
+    
+    <form class="form" method="post">{% csrf_token %}
+      <input type="text" placeholder="Ism" required name="first_name" />
+      <input type="text" placeholder="Familiya" required name="last_name" />
+      <input type="text" placeholder="Username" required name="username" />
+      <input type="password" placeholder="Parol" required name="password1" />
+      <input type="password" placeholder="Parol tasdig'i" required name="password1" />
+      <input type="submit" value="Tasdiqlash">
+      <a href="{% url 'login' %}"> <p>Hisobingiz bormi, Kirish</p></a>
+    </form>
+  </div>
+
+{% endblock content %}

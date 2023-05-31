@@ -13,23 +13,202 @@
         <link rel="stylesheet" href="{% static 'css/cart.css' %}"> 
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+
+            
+            function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken')
+
+            function getCookie(name) {
+                // Split cookie string and get all individual name=value pairs in an array
+                var cookieArr = document.cookie.split(";");
+
+                // Loop through the array elements
+                for(var i = 0; i < cookieArr.length; i++) {
+                    var cookiePair = cookieArr[i].split("=");
+
+                    /* Removing whitespace at the beginning of the cookie name
+                    and compare it with the given string */
+                    if(name == cookiePair[0].trim()) {
+                        // Decode the cookie value and return
+                        return decodeURIComponent(cookiePair[1]);
+                    }
+                }
+
+                // Return null if not found
+                return null;
+            }
+            var cart = JSON.parse(getCookie('cart'))
+
+            if (cart == undefined){
+                cart = {}
+                console.log('Cart Created!', cart)
+                document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            }
+            console.log('Cart:', cart)
+        </script>
+        <style>
+            body{
+                margin-top: auto;
+                background-color: #f1f1f1;
+            }
+            .border{
+                border-bottom:1px solid #F1F1F1;
+                margin-bottom:10px;
+            }
+            .main-secction{
+                box-shadow: 10px 10px 10px;
+            }
+            .image-section{
+                padding: 0px;
+            }
+            .image-section img{
+                width: 100%;
+                height:250px;
+                position: relative;
+            }
+            .user-image{
+                position: absolute;
+                margin-top:-50px;
+            }
+            .user-left-part{
+                margin: 0px;
+            }
+            .user-image img{
+                width:150px;
+                height:150px;
+            }
+            .user-profil-part{
+                padding-bottom:30px;
+                background-color:#FAFAFA;
+            }
+            .follow{    
+                margin-top:70px;   
+            }
+            .user-detail-row{
+                margin:0px; 
+            }
+            .user-detail-section2 p{
+                font-size:12px;
+                padding: 0px;
+                margin: 0px;
+            }
+            .user-detail-section2{
+                margin-top:10px;
+            }
+            .user-detail-section2 span{
+                color:#7CBBC3;
+                font-size: 20px;
+            }
+            .user-detail-section2 small{
+                font-size:12px;
+                color:#D3A86A;
+            }
+            .profile-right-section{
+                padding: 20px 0px 10px 15px;
+                background-color: #FFFFFF;  
+            }
+            .profile-right-section-row{
+                margin: 0px;
+            }
+            .profile-header-section1 h1{
+                font-size: 25px;
+                margin: 0px;
+            }
+            .profile-header-section1 h5{
+                color: #0062cc;
+            }
+            .req-btn{
+                height:30px;
+                font-size:12px;
+            }
+            .profile-tag{
+                padding: 10px;
+                border:1px solid #F6F6F6;
+            }
+            .profile-tag p{
+                font-size: 12px;
+                color:black;
+            }
+            .profile-tag i{
+                color:#ADADAD;
+                font-size: 20px;
+            }
+            .image-right-part{
+                background-color: #FCFCFC;
+                margin: 0px;
+                padding: 5px;
+            }
+            .img-main-rightPart{
+                background-color: #FCFCFC;
+                margin-top: auto;
+            }
+            .image-right-detail{
+                padding: 0px;
+            }
+            .image-right-detail p{
+                font-size: 12px;
+            }
+            .image-right-detail a:hover{
+                text-decoration: none;
+            }
+            .image-right img{
+                width: 100%;
+            }
+            .image-right-detail-section2{
+                margin: 0px;
+            }
+            .image-right-detail-section2 p{
+                color:#38ACDF;
+                margin:0px;
+            }
+            .image-right-detail-section2 span{
+                color:#7F7F7F;
+            }
+
+            .nav-link{
+                font-size: 1.2em;    
+            }
+        </style>
     </head>
     <body>
     <!--navbar-->
         <header>
 
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <img style="height: 100px; width: 100px;" src="{% static 'images/logo.jpg' %}" alt="">
             </a>
             <ul class="navbar">
-                
-                <li><a href="#home">Uy</a></li>
                 <li><a href="#about">Biz haqimizda</a></li>
                 <li><a href="{% url 'shopping' %}">Xarid qilish</a></li>
                 <li><a href="#customers">Mijozlar</a></li>
-                <li><a href="{% url 'cart' %}">Savat</a></li>
-                <li><a href="{% url 'login' %}" >Kirish</a></li>
-                <li><a href="{% url 'signup' %}" >Ro'yxatdan o'tish</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'cart' user.username %}">Savat</a></li>
+                    <p>{{cartItems}}</p>
+                    <li><a href="{% url 'profil' user.username %}" >Profil</a></li>
+                    <li><a href="{% url 'logout' %}" >Chiqish</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'login' %}" >Kirish</a></li>
+                    <li><a href="{% url 'signup' %}" >Ro'yxatdan o'tish</a></li>
+                {% endif %}
+                
             </ul>  
             <!--icon-->
         
@@ -81,6 +260,9 @@
         <!--jsga link--> 
         <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/script.js' %}"></script>
+
+        <script src="{% static 'js/cart.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>
 </html>
 
